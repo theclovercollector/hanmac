@@ -1,191 +1,145 @@
-// var slideWrapper = $(".full-wide-slider"),
-//     iframes = slideWrapper.find('.embed-player'),
-//     lazyImages = slideWrapper.find('.slide-image'),
-//     lazyCounter = 0;
+$(function(){
 
-// // POST commands to YouTube or Vimeo API
-// function postMessageToPlayer(player, command){
-//   if (player == null || command == null) return;
-//   player.contentWindow.postMessage(JSON.stringify(command), "*");
-// }
-
-// // When the slide is changing
-// function changeSlide(slick, control){
-//   var currentSlide, slideType, startTime, player, video;
-
-//   currentSlide = slick.find(".slick-current");
-//   slideType = currentSlide.attr("class").split(" ")[1];
-//   player = currentSlide.find("iframe").get(0);
-//   startTime = currentSlide.data("video-start");
-
-//   if (slideType === "vimeo") {
-//     switch (control) {
-//       case "play":
-//         if (startTime != null && !currentSlide.hasClass('started')) {
-//           currentSlide.addClass('started');
-//           postMessageToPlayer(player, {
-//             "method": "setCurrentTime",
-//             "value" : startTime
-//           });
-//         }
-//         postMessageToPlayer(player, {
-//           "method": "play",
-//           "value" : 1
-//         });
-//         break;
-//       case "pause":
-//         postMessageToPlayer(player, {
-//           "method": "pause",
-//           "value": 1
-//         });
-//         break;
-//     }
-//   } else if (slideType === "youtube") {
-//     switch (control) {
-//       case "play":
-//         postMessageToPlayer(player, {
-//           "event": "command",
-//           "func": "mute"
-//         });
-//         postMessageToPlayer(player, {
-//           "event": "command",
-//           "func": "playVideo"
-//         });
-//         break;
-//       case "pause":
-//         postMessageToPlayer(player, {
-//           "event": "command",
-//           "func": "pauseVideo"
-//         });
-//         break;
-//     }
-//   } else if (slideType === "video") {
-//     video = currentSlide.children("video").get(0);
-//     if (video != null) {
-//       if (control === "play"){
-//         video.play();
-//       } else {
-//         video.pause();
-//       }
-//     }
-//   }
-// }
-
-// // Resize player
-// function resizePlayer(iframes, ratio) {
-//   if (!iframes[0]) return;
+    $(window).on("scroll", function() {
+    
+      if($(window).scrollTop()>100) {
+        $("header").removeClass("large").addClass("small");
+      } else {
+        $("header").removeClass("small").addClass("large");
+      }
+      
+    });
+    
+    (function($){
+      $.fn.dropdown = function(){
+        return this.each(function(){
+          var $gnb = $(this),
+              $menu = $gnb.find(".menu"),
+              $depth1 = $gnb.find(".depth1"),
+              $depth2 = $gnb.find(".depth2");
+          
+          $gnb.mouseenter(function(){
+            gnbOn();
+          }).mouseleave(function(){
+            gnbOff();
+          });
+          
+          $gnb.find("a").focusin(function(){
+            gnbOn();
+          }).focusout(function(){
+            gnbOff();
+          });
+            
+          function gnbOn(){
+            $gnb.find($depth2).stop().animate({height: "235"});
+          }
+          
+          function gnbOff(){
+            $gnb.find($depth2).stop().animate({height: "0"});
+          }
+    
+        });
+      }
+    })(jQuery);
+    
+    if (matchMedia("screen and (min-width: 1024px)").matches) {
+      $(function(){
+      $(".dropdown").dropdown();
+    });
+    } else {
+     $(function(){
+    });
+    }
+    
+    $('#toggle').click(function() {
+       $(this).toggleClass('active');
+       $('#gnb').toggleClass('open');
+      });
+      
+    /*$('.dropdown').hover(function() {
+       $('#logo').toggleClass('logo_on');
+      });
+    
+    $('.dropdown').hover(function() {
+       $('aside.util').toggleClass('util_on');
+      });*/
+  })
   
-//     var win = $(".full-wide-slider"),
-//         width = win.width(),
-//         playerWidth,
-//         height = win.height(),
-//         playerHeight,
-//         ratio = ratio || 16/9;
+  jQuery(document).ready(function($){
+	var isLateralNavAnimating = false;
+	
+	//open/close lateral navigation
+	$('.cd-nav-trigger').on('click', function(event){
+		event.preventDefault();
+		//stop if nav animation is running 
+		if( !isLateralNavAnimating ) {
+			if($(this).parents('.csstransitions').length > 0 ) isLateralNavAnimating = true; 
+			
+			$('body').toggleClass('navigation-is-open');
+			$('.cd-navigation-wrapper').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+				//animation is over
+				isLateralNavAnimating = false;
+			});
+		}
+	});
+});
 
-//     iframes.each(function(){
-//       var current = $(this);
-//       if (width / ratio < height) {
-//         playerWidth = Math.ceil(height * ratio);
-//         current.width(playerWidth).height(height).css({
-//           left: (width - playerWidth) / 2,
-//            top: 0
-//           });
-//       } else {
-//         playerHeight = Math.ceil(width / ratio);
-//         current.width(width).height(playerHeight).css({
-//           left: 0,
-//           top: (height - playerHeight) / 2
-//         });
-//       }
-//     });
-// }
-
-// // DOM Ready
-// $(function() {
-//   // Initialize
-//   slideWrapper.on("init", function(slick){
-//     slick = $(slick.currentTarget);
-//     setTimeout(function(){
-//       changeSlide(slick,"play");
-//     }, 1000);
-//     resizePlayer(iframes, 16/9);
-//   });
-//   slideWrapper.on("beforeChange", function(event, slick) {
-//     slick = $(slick.$slider);
-//     changeSlide(slick,"pause");
-//   });
-//   slideWrapper.on("afterChange", function(event, slick) {
-//     slick = $(slick.$slider);
-//     changeSlide(slick,"play");
-//   });
-//   slideWrapper.on("lazyLoaded", function(event, slick, image, imageSource) {
-//     lazyCounter++;
-//     if (lazyCounter === lazyImages.length){
-//       lazyImages.addClass('show');
-//       slideWrapper.slick("slickPlay");
-//     }
-//   });
-
-//   //start the slider
-//   slideWrapper.slick({
-//     fade:true,
-//     autoplaySpeed:4800,
-//     lazyLoad:"progressive",
-//     speed:600,
-//     arrows:false,
-//     dots:true,
-//     cssEase:"cubic-bezier(0.87, 0.03, 0.41, 0.9)"
-//   });
-// });
-
-// // Resize event
-// $(window).on("resize.slickVideoPlayer", function(){  
-//   resizePlayer(iframes, 16/9);
-// });
-
-// const progressCircle = document.querySelector(".autoplay-progress svg");
-// const progressContent = document.querySelector(".autoplay-progress span");
 var swiper = new Swiper(".hanmac-swiper", {
-  spaceBetween: 30,
-  centeredSlides: true,
-  autoplay: {
-    delay: 3800,
-    disableOnInteraction: false
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev"
-  },
-  // on: {
-  //   autoplayTimeLeft(s, time, progress) {
-  //     progressCircle.style.setProperty("--progress", 1 - progress);
-  //     progressContent.textContent = `${Math.ceil(time / 1000)}s`;
-  //   }
-  // }
-});
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+      delay: 3800,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+  });
 
-var swiper = new Swiper(".slider-home-blossom", {
-  scrollbar: {
-    el: ".swiper-scrollbar",
-    hide: true,
-  },
-});
+  var swiper = new Swiper(".slider-home-blossom", {
+    scrollbar: {
+      el: ".swiper-scrollbar",
+      hide: true,
+    },
+  });
 
-/**
- * BxSlider v4.1.2 - Fully loaded, responsive content slider
- * http://bxslider.com
- *
- * Copyright 2014, Steven Wanderski - http://stevenwanderski.com - http://bxcreative.com
- * Written while drinking Belgian ales and listening to jazz
- *
- * Released under the MIT license - http://opensource.org/licenses/MIT
- */
+$(document).ready(function() {
+    var floatPosition = parseInt($("#floatMenu").css('top'));
+    $(window).scroll(function() {
+     var scrollTop = $(window).scrollTop();
+     var newPosition = scrollTop + floatPosition + "px";
+     $("#floatMenu").stop().animate({
+      "top" : newPosition
+     }, 500);
+    }).scroll();
+   });
+   
+   
+   $(function(){
+    $('.data').mouseover(function(e) { 
+     $(this).mousemove(function(e) {
+      $('#divLayer #title').empty().append($(this).attr("l_name"));
+   
+      $('#divLayer #conttent').empty().append($(this).text());
+   
+      var t=e.pageY-15;
+      var l=e.pageX-120;
+   
+      $('#divLayer').css({"top":t, "left":l,"position":"absolute","opacity":"0,8" }).show();
+     });
+    });
+   
+    $('.data').mouseout(function() {
+     $('#divLayer').hide();
+    });
+   });
 
-;(function($){
+   ;(function($){
 
 	var plugin = {};
 
