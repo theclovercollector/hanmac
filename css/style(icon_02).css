@@ -1,0 +1,75 @@
+#icon_02 {width:100%; background-color:#fff; overflow:hidden; margin:60px 0 0px 0;   }
+#icon_02 div.wdFull{ position:relative;  z-index: 0; }
+#icon_02 div.wdFull::after {content:""; position: absolute;  top:0; left:0; height:100%; width:50%;  z-index: -1; 
+display:block;  background-color:#f5f5f5;  }
+#icon_02 .wd13{padding:80px 80px 80px 0px;  background-color:#f5f5f5;  overflow:hidden; }
+#icon_02 section {float:left; width:50%;   display:block; height:380px;  box-sizing:border-box;
+ margin:0px; padding: 0px;  }
+#icon_02 .tit {width:1200px; margin:0 auto; padding-bottom:35px; overflow:hidden;}
+#icon_02 .tit h3{float:left; font-size:35px; letter-spacing:20px; }
+#icon_02 .tit p{float:left; font-size:16px; padding:22px 0 0 35px; color:#999}
+#icon_02 section.Box_02 {padding:30px 50px; background-color:#fff; position:relative;}
+#icon_02 section p{display:block; padding-top:15px; font-size:16px; line-height: 30px; color:#fff;   }
+#icon_02 section a.btn {display:block; width:120px; padding:15px 5px 16px 5px; text-align:center; font-size:15px;
+border:1px solid #fff; margin-top:35px; border-radius:5px 5px; color:#fff; }
+#icon_02 section a.btn:hover {color:#333; border:1px solid #fff; color:#111; background-color:#f7f7f7; }
+
+#icon_02 .Box_02 h3{font-size:17px; color:#ed1b23;  padding:0 0px 0px 3px; margin :0; border-bottom:0px solid #dfdfdf;}
+#icon_02 .Box_02 p.more{position:absolute; right:50px; bottom:28px; color:#ccc; font-weight:normal; text-decoration: underline;}
+#icon_02 .Box_02 p.list{padding-top:18px;}
+#icon_02 .Box_02 .main_notice td {padding:26px 0; border-bottom:1px dashed #dfdfdf ;}
+#icon_02 .Box_02 .main_notice tr:first-child {display:none;}
+
+#icon_02 ul {padding: 0px 150px 0px 0; width:100%; margin:0px auto; overflow: hidden;}
+#icon_02 ul li {float:left;  width:40%; list-style-type:none; padding:20px 0; }
+#icon_02 ul li:first-child {border:0;}
+#icon_02 ul li .tit2 {display:block; padding-bottom:10px; font-size:20px;}
+#icon_02 ul li .txt {display:block; color:#aaa; font-size:16px; line-height:26px; }
+#icon_02 ul li a{display:block; height:150px; text-align: center; padding-top:10px; box-sizing:border-box;
+  background-position:center bottom; background-repeat:no-repeat;  transition: all 0.3s;}
+#icon_02 ul li.ico1 a:hover,#icon_02 ul li.ico2 a:hover,#icon_02 ul li.ico3 a:hover,#icon_02 ul li.ico4 a:hover{
+		background-position:center 90%; transition: all 0.3s;}
+#icon_02 ul li.ico1 a{ background-image:url("../img/notice.png"); }
+#icon_02 ul li.ico2 a{ background-image:url("../img/way.png"); }
+#icon_02 ul li.ico3 a{ background-image:url("../img/cs.png");}
+#icon_02 ul li.ico4 a{ background-image:url("../img/bag.png");}
+
+/*---------------------------------------
+  MOBILE RESPONSIVE              
+-----------------------------------------*/
+@media (max-width: 1023px) {
+#icon_02 {padding:20px 0 ; }
+#icon_02 .wd13{padding:20px 0px 50px 0 !important;}
+#icon_02 .tit {width:100%; text-align:center; }
+#icon_02 .tit h3{clear:both; float:none; font-size:25px; letter-spacing:10px; }
+#icon_02 .tit p{clear:both; float:none; font-size:14px; padding:22px 0 0 0; }
+#icon_02 section { width:100%;  height:auto; }
+#icon_02 section img {width:100%; vertical-align:top;}	
+#icon_02 section.Box_01{padding:0px 0 30px 0;}
+#icon_02 section a.btn {width:90px; padding:12px 5px 13px 5px;font-size:15px;margin-top:25px; color:#333; }
+#icon_02 ul {padding:0 0px; }
+#icon_02 ul li {padding:10px 0; }
+#icon_02 ul li .tit2 { font-size:18px;}
+#icon_02 ul li .txt {font-size:14px; line-height:24px; }
+#icon_02 ul li a{ height:140px;  background-position:center bottom;}
+#icon_02 ul li.ico1 a:hover,#icon_02 ul li.ico2 a:hover,#icon_02 ul li.ico3 a:hover,#icon_02 ul li.ico4 a:hover{background-position:center bottom;}
+
+#icon_02 section.Box_02 {padding:30px 25px 80px 25px; margin:0 4%; width:92%; box-sizing:border-box; }
+#icon_02 .Box_02 h3{font-size:17px; color:#ed1b23;  padding:0 0px 0px 3px; margin :0; border-bottom:0px solid #dfdfdf;}
+#icon_02 .Box_02 p.more{position:absolute; right:50px; bottom:28px; color:#ccc; font-weight:normal; text-decoration: underline;}
+#icon_02 .Box_02 p.list{padding-top:18px;  }
+#icon_02 .Box_02 .main_notice td a {font-size:14px !important;}
+#icon_02 .Box_02 .main_notice td:last-child{display:none;}
+#icon_02 .Box_02 .main_notice tr:first-child {display:none;}
+
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 640px) {
+}
+@media (max-width: 480px) {
+}
+@media (max-width: 320px) {
+}
+
+
